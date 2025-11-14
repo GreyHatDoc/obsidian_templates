@@ -1,15 +1,3 @@
----
-depapp : |
-    ### Object Name: |<Name>|
-    - Associated by: |<Association>|
-    - This object supplies: |<None>|
-    - This object ingests: |<None>|
-varlist: "|<VarName>|: |<VarType>|, |<Default>|"
-funclist: "|<FuncName>|(|<value>|) : |<RetType>|"
-addintlink: "[[|<MarkdownFile>|]]"
-addextlink: "[|<Description>|](|<url>|)
----
-
 
 # Name |<Name>|
 
@@ -57,3 +45,18 @@ addextlink: "[|<Description>|](|<url>|)
 # Notes
 - |<Notes>|
 - 
+
+# Templates 
+
+-->
+depapp ||
+    ### Object Name: |<Name>|
+    - Associated by: |<Association>|
+    - This object supplies: |<None>|
+    - This object ingests: |<None>|
+<--
+-->varlist || |<VarName>|: |<VarType>|, |<Default>| <--
+--> funclist || |<FuncName>|(|<value>|) : |<RetType>| <--
+--> addintlink || [[|<MarkdownFile>|]] <--
+--> addextlink || [|<Description>|](|<url>|) <--
+--> addtask || - [ ] |<Task>| <--=
