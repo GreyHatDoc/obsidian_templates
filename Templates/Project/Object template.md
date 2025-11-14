@@ -48,15 +48,34 @@
 
 # Templates 
 
+# Templates
 -->
+
 depapp ||
-    ### Object Name: |<Name>|
-    - Associated by: |<Association>|
-    - This object supplies: |<None>|
-    - This object ingests: |<None>|
+
+### Object Name: |<Name>|
+
+- Associated by: |<Association>|
+
+- This object supplies: |<None>|
+
+- This object ingests: |<None>|
+
 <--
+
 -->varlist || |<VarName>|: |<VarType>|, |<Default>| <--
---> funclist || |<FuncName>|(|<value>|) : |<RetType>| <--
+
+--> funclist || ####|<FuncName>|(|<value>|) : |<RetType>| 
+##### Notes:
+- 
+##### Tasks:
+- [ ]
+##### Location
+- [|< Code Location>|](|<file_path>|#L|<line_start>|-L|<line_end|>)
+<--
+
 --> addintlink || [[|<MarkdownFile>|]] <--
+
 --> addextlink || [|<Description>|](|<url>|) <--
---> addtask || - [ ] |<Task>| <--=
+
+--> addtask || - [ ] |<Task>| <--
