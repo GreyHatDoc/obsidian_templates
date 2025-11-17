@@ -7,6 +7,7 @@ VAULT_PATH=""
 TEMPLATE_FOLDER_NAME="Templates"
 TEMPLATE_FOLDERS=()
 CLEANUP=0
+KEEP_EXISTING=0
 
 function parse_arguments() {
     echo "Parsing arguments..."
@@ -55,6 +56,10 @@ function parse_arguments() {
                     ((counter++))
                 fi
                 ;;
+            --keep|-k)
+                KEEP_EXISTING=1
+                echo "Setting to keep existing templates if they exist."
+                ;;
             *)
                 echo "Unknown argument: ${args[$counter]}, ignoring..."
                 ;;
@@ -87,7 +92,14 @@ function install_templates() {
 echo "Installing templates..."
 for folder in "${TEMPLATE_FOLDERS[@]}"; do
     if [ -d "$TEMPLATES_PATH/$folder" ]; then
-        cp -r "$TEMPLATES_PATH/$folder/"* "$VAULT_PATH/$TEMPLATE_FOLDER_NAME/"
+        if [ $KEEP_EXISTING -eq 0 ]; then
+            echo "Overwriting existing templates in '$VAULT_PATH/$TEMPLATE_FOLDER_NAME/'."
+            cp -r -f "$TEMPLATES_PATH/$folder/"* "$VAULT_PATH/$TEMPLATE_FOLDER_NAME/"
+        else
+            echo "Keeping existing templates in '$VAULT_PATH/$TEMPLATE_FOLDER_NAME/'."
+            cp -r -n "$TEMPLATES_PATH/$folder/"* "$VAULT_PATH/$TEMPLATE_FOLDER_NAME/"
+        fi
+        
         echo "Installed templates from '$folder' to '$VAULT_PATH/$TEMPLATE_FOLDER_NAME/'."
     else
         echo "Warning: Template folder '$folder' does not exist in '$TEMPLATES_PATH'. Skipping."
@@ -141,6 +153,8 @@ function help() {
     echo "[-n| --name <template folder name>]"
     echo "Specifies the name of the folder that the templates will be installed into."
     echo "If not provided, defaults to 'Templates'"
+    echo -e "[-k | --keep]\n"
+    echo "Keep the existing templates if they exist. By default, the script will overwrite existing templates."
 
 }
 
